@@ -1,11 +1,121 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import bitLogo from "../assets/bit.svg";
+import bitLogoWhite from "../assets/bitwhite.svg";
+import aghLogo from "../assets/agh.svg";
+import informatykaLogo from "../assets/informatyka.svg";
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+    <nav class="flex items-center justify-between m-auto py-8 w-240">
+        <a href="/" draggable="false">
+            <img class="h-8" draggable="false" src={bitLogo.src} />
+        </a>
+
+        <ul
+            class="flex items-center justify-end gap-12 w-full h-full transition-opacity"
+        >
+            <li><a href="#about">O nas</a></li>
+            <li><a href="#work">Działalność</a></li>
+            <li><a href="#management">Zarząd</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+    <main class="m-auto w-240 relative">
+        <div class="py-16 flex flex-col gap-8 justify-center h-100">
+            <span class="text-6xl"
+                >Tutaj musi być napisane <br /> coś fajnego</span
+            >
+        </div>
+    </main>
+    <div class="flex items-center justify-center h-12 gap-12 bg-blue-800 p-12">
+        <div class="w-24 flex justify-center">
+            <img class="h-8" src={bitLogoWhite.src} />
+        </div>
+        <div class="w-24 flex justify-center">
+            <img class="h-16" src={aghLogo.src} />
+        </div>
+        <div class="w-24 flex justify-center">
+            <img class="h-12" src={informatykaLogo.src} />
+        </div>
+    </div>
+    <section class="m-auto w-240 flex flex-col gap-2 py-8">
+        <h2 class="text-2xl">O nas</h2>
+        <p>
+            Koło naukowe BIT to przede wszystkim miejsce, gdzie studenci AGH
+            mogą rozwijać swoje zainteresowania i się nimi dzielić. Znajdziemy
+            tutaj ludzi zainteresowanych nowoczesnymi metodami tworzenia
+            oprogramowania, aktualnymi technologiami webowymi, a także
+            algorytmami czy sztuczną inteligencją.
+        </p>
+    </section>
+    <section class="m-auto w-240 flex flex-col gap-2 py-8">
+        <h2 class="text-2xl">Sekcje</h2>
+        <div class="grid grid-cols-3 gap-4">
+            <div
+                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
+            >
+                <h3 class="text-xl">AI</h3>
+                <p>
+                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
+                    inteligencji.
+                </p>
+            </div>
+            <div
+                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
+            >
+                <h3 class="text-xl">AI</h3>
+                <p>
+                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
+                    inteligencji.
+                </p>
+            </div>
+            <div
+                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
+            >
+                <h3 class="text-xl">AI</h3>
+                <p>
+                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
+                    inteligencji.
+                </p>
+            </div>
+            <div
+                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
+            >
+                <h3 class="text-xl">AI</h3>
+                <p>
+                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
+                    inteligencji.
+                </p>
+            </div>
+            <div
+                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
+            >
+                <h3 class="text-xl">AI</h3>
+                <p>
+                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
+                    inteligencji.
+                </p>
+            </div>
+            <div
+                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
+            >
+                <h3 class="text-xl">AI</h3>
+                <p>
+                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
+                    inteligencji.
+                </p>
+            </div>
+            <div
+                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
+            >
+                <h3 class="text-xl">AI</h3>
+                <p>
+                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
+                    inteligencji.
+                </p>
+            </div>
+        </div>
+    </section>
 </Layout>
