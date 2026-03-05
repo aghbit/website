@@ -63,22 +63,69 @@ const board = [
     "Michał Dudek",
     "Julian Dworzycki",
 ];
+
+const footerGroups = [
+    {
+        title: "Dokumenty", // Or "Formalia"
+        links: [{ label: "Regulamin / Statut", href: "/statut.pdf" }],
+    },
+    {
+        title: "Social Media",
+        links: [
+            { label: "Facebook", href: "https://www.facebook.com/knbit" },
+            { label: "GitHub", href: "https://github.com/aghbit" },
+        ],
+    },
+    {
+        title: "Kontakt",
+        links: [
+            {
+                label: "kontakt@knbit.edu.pl",
+                href: "mailto:kontakt@knbit.edu.pl",
+            },
+        ],
+    },
+];
+
+const navLinks = [
+    { label: "O nas", href: "#about" },
+    { label: "Działalność", href: "#groups" },
+    { label: "Zarząd", href: "#board" },
+    { label: "Kontakt", href: "#contact" },
+];
 ---
 
 <Layout>
-    <nav class="sticky top-0 bg-white/50 z-10 backdrop-blur-sm mt-8">
+    <nav
+        class="sticky top-0 bg-white/50 z-10 backdrop-blur-md border-b border-stone-200/50"
+    >
         <Container class="flex items-center justify-between m-auto py-4">
-            <a href="/" draggable="false">
-                <img class="h-8" draggable="false" src={bitLogo.src} />
+            <a
+                href="/"
+                draggable="false"
+                class="hover:opacity-80 transition-opacity"
+            >
+                <img
+                    class="h-8"
+                    draggable="false"
+                    src={bitLogo.src}
+                    alt="BIT Logo"
+                />
             </a>
 
-            <ul
-                class="flex items-center justify-end gap-12 w-full h-full transition-opacity"
-            >
-                <li><a href="#about">O nas</a></li>
-                <li><a href="#groups">Działalność</a></li>
-                <li><a href="#board">Zarząd</a></li>
-                <li><a href="#contact">Kontakt</a></li>
+            <ul class="flex items-center justify-end gap-12 transition-opacity">
+                {
+                    navLinks.map(({ label, href }) => (
+                        <li>
+                            <a
+                                href={href}
+                                class="text-stone-600 hover:text-black transition-colors"
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    ))
+                }
             </ul>
         </Container>
     </nav>
@@ -140,6 +187,33 @@ const board = [
                 <BoardPill head name={boardHead} />
                 {board.map((name) => <BoardPill name={name} />)}
             </div>
+        </Container>
+    </Section>
+    <Section>
+        <Container>
+            <footer class="grid grid-cols-1 md:grid-cols-3 gap-12 py-16">
+                {
+                    footerGroups.map((group) => (
+                        <div class="flex flex-col gap-4">
+                            <h3 class="font-medium text-stone-900 ">
+                                {group.title}
+                            </h3>
+                            <ul class="flex flex-col gap-2">
+                                {group.links.map((link) => (
+                                    <li>
+                                        <a
+                                            href={link.href}
+                                            class="text-stone-600 hover:text-black transition-colors"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
+            </footer>
         </Container>
     </Section>
 </Layout>
