@@ -3,3 +3,7 @@
 * {
     scroll-behavior: smooth;
 }
+
+html {
+    @apply text-stone-800;
+}

@@ -4,6 +4,7 @@ import "../styles/global.css";
 import bitLogo from "../assets/bit.svg";
 import aghLogo from "../assets/agh.svg";
 import informatykaLogo from "../assets/informatyka.svg";
+import inaugurationPhoto from "../assets/inauguracja.jpg";
 
 import Layout from "../layouts/Layout.astro";
 import BitSection from "../components/BitSection.astro";
@@ -112,7 +113,6 @@ const navLinks = [
                     alt="BIT Logo"
                 />
             </a>
-
             <ul class="flex items-center justify-end gap-12 transition-opacity">
                 {
                     navLinks.map(({ label, href }) => (
@@ -133,17 +133,20 @@ const navLinks = [
         <canvas class="absolute top-0 left-0 -z-50 opacity-5" id="bits-canvas"
         ></canvas>
         <main>
-            <Container class="m-auto relative">
-                <div class="py-16 flex flex-col gap-8 justify-center h-128">
-                    <span class="text-6xl font-medium" id="slogan">
-                        Tutaj musi być napisane <br />
-                        coś fajnego
+            <Container class="m-auto relative flex justify-center">
+                <div
+                    class="py-16 flex flex-col gap-8 justify-center items-center h-180"
+                >
+                    <img class="w-45" src={bitLogo.src} />
+                    <span class="text-6xl font-medium text-center" id="slogan">
+                        Twoje wejście do <br />
+                        świata informatyki
                     </span>
                 </div>
             </Container>
         </main>
         <div
-            class="flex items-center justify-center h-12 gap-12 p-12 opacity-50"
+            class="absolute bottom-0 left-0 right-0 mx-auto flex items-center justify-center h-12 gap-12 p-12"
         >
             <div class="w-24 flex justify-center">
                 <img class="h-8" src={bitLogo.src} />
@@ -157,20 +160,30 @@ const navLinks = [
         </div>
     </div>
     <Section class="bg-stone-100" id="about">
-        <Container class="flex flex-col gap-8">
-            <h2 class="text-2xl font-medium">O nas</h2>
-            <p class="text-xl">
-                Koło naukowe BIT to przede wszystkim miejsce, gdzie studenci AGH
-                mogą rozwijać swoje zainteresowania i się nimi dzielić.
-                Znajdziemy tutaj ludzi zainteresowanych nowoczesnymi metodami
-                tworzenia oprogramowania, aktualnymi technologiami webowymi, a
-                także algorytmami czy sztuczną inteligencją.
-            </p>
+        <Container class="flex gap-8">
+            <div class="flex flex-col gap-8">
+                <h2 class="text-2xl font-medium">O nas</h2>
+                <p class="text-xl">
+                    Koło naukowe BIT to przede wszystkim miejsce, gdzie studenci
+                    AGH mogą rozwijać swoje zainteresowania i się nimi dzielić.
+                    Znajdziemy tutaj ludzi zainteresowanych nowoczesnymi
+                    metodami tworzenia oprogramowania, aktualnymi technologiami
+                    webowymi, a także algorytmami czy sztuczną inteligencją.
+                </p>
+            </div>
         </Container>
     </Section>
     <Section id="groups">
         <Container class="flex flex-col gap-8">
             <h2 class="text-2xl font-medium">Sekcje</h2>
+            <p class="text-xl">
+                Oprócz rozwijania swoich pasji, dzielimy się też wiedzą z
+                zakresu studiów, prowadząc zajęcia wprowadzające w dziedziny
+                matematyki i informatyki dla osób, które wcześniej nie miały z
+                danymi zagadnieniami styczności. Wszystko po to, żeby wymienić
+                się doświadczeniem i szybciej oraz lepiej przygotować się na
+                zajęcia na uczelni.
+            </p>
             <div class="grid grid-cols-3 gap-2">
                 {
                     sections.map(({ name, description }) => (
@@ -191,7 +204,10 @@ const navLinks = [
     </Section>
     <Section>
         <Container>
-            <footer class="grid grid-cols-1 md:grid-cols-3 gap-12 py-16">
+            <footer
+                class="grid grid-cols-1 md:grid-cols-3 gap-12 py-16"
+                id="contact"
+            >
                 {
                     footerGroups.map((group) => (
                         <div class="flex flex-col gap-4">
