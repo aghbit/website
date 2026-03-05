@@ -184,7 +184,7 @@ const navLinks = [
                 się doświadczeniem i szybciej oraz lepiej przygotować się na
                 zajęcia na uczelni.
             </p>
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                 {
                     sections.map(({ name, description }) => (
                         <BitSection name={name} description={description} />
@@ -196,7 +196,10 @@ const navLinks = [
     <Section class="bg-stone-800 board-scroll-trigger" id="board">
         <Container class="flex flex-col gap-8">
             <h2 class="text-2xl font-medium text-white">Zarząd</h2>
-            <div class="grid grid-cols-5 gap-2" id="board-grid">
+            <div
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2"
+                id="board-grid"
+            >
                 <BoardPill head name={boardHead} />
                 {board.map((name) => <BoardPill name={name} />)}
             </div>
