@@ -1,121 +1,283 @@
 ---
+import "../styles/global.css";
+
 import bitLogo from "../assets/bit.svg";
-import bitLogoWhite from "../assets/bitwhite.svg";
 import aghLogo from "../assets/agh.svg";
 import informatykaLogo from "../assets/informatyka.svg";
-import "../styles/global.css";
+
 import Layout from "../layouts/Layout.astro";
+import BitSection from "../components/BitSection.astro";
+import BoardPill from "../components/BoardPill.astro";
+import Section from "../components/Section.astro";
+import Container from "../components/Container.astro";
+
+const sections = [
+    {
+        name: "AI",
+        description:
+            "Sekcja skupia się na przekazywaniu wiedzy z zakresu sztucznej inteligencji.",
+    },
+    {
+        name: "Algo Konkursy",
+        description:
+            "Sekcja skupia się na rozwiązywaniu zadań algorytmicznych oraz przygotowaniu do udziału w konkursach programistycznych.",
+    },
+    {
+        name: "Infra",
+        description:
+            "Sekcja skupia się na zagadnieniach infrastruktury IT, pracy z systemem Linux oraz wdrażaniu aplikacji na serwery.",
+    },
+    {
+        name: "Web",
+        description:
+            "Sekcja skupia się na budowaniu aplikacji webowych oraz poznawaniu nowoczesnych technologii internetowych.",
+    },
+    {
+        name: "Algo",
+        description:
+            "Sekcja skupia się na wprowadzaniu do świata algorytmiki i nauce podstawowych pojęć programistycznych.",
+    },
+    {
+        name: "Maths",
+        description:
+            "Sekcja skupia się na przygotowaniu uczniów do matury z matematyki oraz wsparciu studentów na pierwszym roku studiów.",
+    },
+    {
+        name: "Fizyka",
+        description:
+            "Sekcja skupia się na pomocy w zaliczeniu fizyki na pierwszym i drugim roku studiów pod okiem starszych kolegów.",
+    },
+];
+
+const boardHead = "Michał Szymocha";
+
+const board = [
+    "Piotr Kacprzak",
+    "Paweł Fornagiel",
+    "Oskar Blajsz",
+    "Maciej Kmąk",
+    "Justyna Orłowska",
+    "Madzia Śmietana",
+    "Sebastian Flajszer",
+    "Mateusz Kursa",
+    "Michał Dudek",
+    "Julian Dworzycki",
+];
 ---
 
 <Layout>
-    <nav class="flex items-center justify-between m-auto py-8 w-240">
-        <a href="/" draggable="false">
-            <img class="h-8" draggable="false" src={bitLogo.src} />
-        </a>
+    <nav class="sticky top-0 bg-white/50 z-10 backdrop-blur-sm mt-8">
+        <Container class="flex items-center justify-between m-auto py-4">
+            <a href="/" draggable="false">
+                <img class="h-8" draggable="false" src={bitLogo.src} />
+            </a>
 
-        <ul
-            class="flex items-center justify-end gap-12 w-full h-full transition-opacity"
-        >
-            <li><a href="#about">O nas</a></li>
-            <li><a href="#work">Działalność</a></li>
-            <li><a href="#management">Zarząd</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-        </ul>
-    </nav>
-    <main class="m-auto w-240 relative">
-        <div class="py-16 flex flex-col gap-8 justify-center h-100">
-            <span class="text-6xl"
-                >Tutaj musi być napisane <br /> coś fajnego</span
+            <ul
+                class="flex items-center justify-end gap-12 w-full h-full transition-opacity"
             >
-        </div>
-    </main>
-    <div class="flex items-center justify-center h-12 gap-12 bg-blue-800 p-12">
-        <div class="w-24 flex justify-center">
-            <img class="h-8" src={bitLogoWhite.src} />
-        </div>
-        <div class="w-24 flex justify-center">
-            <img class="h-16" src={aghLogo.src} />
-        </div>
-        <div class="w-24 flex justify-center">
-            <img class="h-12" src={informatykaLogo.src} />
+                <li><a href="#about">O nas</a></li>
+                <li><a href="#groups">Działalność</a></li>
+                <li><a href="#board">Zarząd</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </Container>
+    </nav>
+    <div class="relative overflow-hidden" id="bits-canvas-container">
+        <canvas class="absolute top-0 left-0 -z-50 opacity-5" id="bits-canvas"
+        ></canvas>
+        <main>
+            <Container class="m-auto relative">
+                <div class="py-16 flex flex-col gap-8 justify-center h-128">
+                    <span class="text-6xl font-medium" id="slogan">
+                        Tutaj musi być napisane <br />
+                        coś fajnego
+                    </span>
+                </div>
+            </Container>
+        </main>
+        <div
+            class="flex items-center justify-center h-12 gap-12 p-12 opacity-50"
+        >
+            <div class="w-24 flex justify-center">
+                <img class="h-8" src={bitLogo.src} />
+            </div>
+            <div class="w-24 flex justify-center">
+                <img class="h-16" src={aghLogo.src} />
+            </div>
+            <div class="w-24 flex justify-center">
+                <img class="h-12" src={informatykaLogo.src} />
+            </div>
         </div>
     </div>
-    <section class="m-auto w-240 flex flex-col gap-2 py-8">
-        <h2 class="text-2xl">O nas</h2>
-        <p>
-            Koło naukowe BIT to przede wszystkim miejsce, gdzie studenci AGH
-            mogą rozwijać swoje zainteresowania i się nimi dzielić. Znajdziemy
-            tutaj ludzi zainteresowanych nowoczesnymi metodami tworzenia
-            oprogramowania, aktualnymi technologiami webowymi, a także
-            algorytmami czy sztuczną inteligencją.
-        </p>
-    </section>
-    <section class="m-auto w-240 flex flex-col gap-2 py-8">
-        <h2 class="text-2xl">Sekcje</h2>
-        <div class="grid grid-cols-3 gap-4">
-            <div
-                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
-            >
-                <h3 class="text-xl">AI</h3>
-                <p>
-                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
-                    inteligencji.
-                </p>
+    <Section class="bg-stone-100" id="about">
+        <Container class="flex flex-col gap-8">
+            <h2 class="text-2xl font-medium">O nas</h2>
+            <p class="text-xl">
+                Koło naukowe BIT to przede wszystkim miejsce, gdzie studenci AGH
+                mogą rozwijać swoje zainteresowania i się nimi dzielić.
+                Znajdziemy tutaj ludzi zainteresowanych nowoczesnymi metodami
+                tworzenia oprogramowania, aktualnymi technologiami webowymi, a
+                także algorytmami czy sztuczną inteligencją.
+            </p>
+        </Container>
+    </Section>
+    <Section id="groups">
+        <Container class="flex flex-col gap-8">
+            <h2 class="text-2xl font-medium">Sekcje</h2>
+            <div class="grid grid-cols-3 gap-2">
+                {
+                    sections.map(({ name, description }) => (
+                        <BitSection name={name} description={description} />
+                    ))
+                }
             </div>
-            <div
-                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
-            >
-                <h3 class="text-xl">AI</h3>
-                <p>
-                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
-                    inteligencji.
-                </p>
+        </Container>
+    </Section>
+    <Section class="bg-stone-800 board-scroll-trigger" id="board">
+        <Container class="flex flex-col gap-8">
+            <h2 class="text-2xl font-medium text-white">Zarząd</h2>
+            <div class="grid grid-cols-5 gap-2" id="board-grid">
+                <BoardPill head name={boardHead} />
+                {board.map((name) => <BoardPill name={name} />)}
             </div>
-            <div
-                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
-            >
-                <h3 class="text-xl">AI</h3>
-                <p>
-                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
-                    inteligencji.
-                </p>
-            </div>
-            <div
-                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
-            >
-                <h3 class="text-xl">AI</h3>
-                <p>
-                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
-                    inteligencji.
-                </p>
-            </div>
-            <div
-                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
-            >
-                <h3 class="text-xl">AI</h3>
-                <p>
-                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
-                    inteligencji.
-                </p>
-            </div>
-            <div
-                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
-            >
-                <h3 class="text-xl">AI</h3>
-                <p>
-                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
-                    inteligencji.
-                </p>
-            </div>
-            <div
-                class="bg-slate-50 rounded-sm border border-slate-200 p-4 flex flex-col gap-4"
-            >
-                <h3 class="text-xl">AI</h3>
-                <p>
-                    Sekcja skupia się na przekazywaniu wiedzy na temat sztucznej
-                    inteligencji.
-                </p>
-            </div>
-        </div>
-    </section>
+        </Container>
+    </Section>
 </Layout>
+
+<script>
+    import gsap from "gsap";
+    import { SplitText } from "gsap/SplitText";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    // Animate slogan
+
+    gsap.registerPlugin(SplitText);
+    gsap.registerPlugin(ScrollTrigger);
+
+    const split = SplitText.create("#slogan", {
+        type: "words",
+    });
+
+    gsap.from(split.words, {
+        y: 100,
+        autoAlpha: 0,
+        stagger: 0.08,
+    });
+
+    // Animate board pills
+
+    const pills = document.querySelectorAll("#board-grid > *");
+
+    gsap.from(pills, {
+        scrollTrigger: ".board-scroll-trigger",
+        opacity: 0,
+        duration: 2,
+        stagger: {
+            each: 0.05,
+            from: "random",
+            ease: "power2.inOut",
+        },
+        ease: "power3.out",
+    });
+
+    // Bits
+
+    {
+        const container = document.querySelector<HTMLDivElement>(
+            "#bits-canvas-container",
+        )!;
+
+        const canvas =
+            document.querySelector<HTMLCanvasElement>("#bits-canvas")!;
+
+        const ctx = canvas.getContext("2d")!;
+
+        let width = (canvas.width = container.clientWidth);
+        let height = (canvas.height = container.clientHeight);
+        let radius = Math.max(width, height);
+
+        const particles = Array(99);
+
+        const images = ["/0.png", "/1.png"];
+
+        const loadImages = images.map((src) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+            });
+        });
+
+        Promise.all(loadImages).then((loadedImages) => {
+            for (let i = 0; i < particles.length; i++) {
+                particles[i] = {
+                    x: 0,
+                    y: 0,
+                    scale: 0,
+                    rotate: 0,
+                    img: loadedImages[i % loadedImages.length],
+                };
+            }
+
+            const tl = gsap
+                .timeline({ onUpdate: draw })
+                .fromTo(
+                    particles,
+                    {
+                        x: (i) => {
+                            const angle =
+                                (i / particles.length) * Math.PI * 2 -
+                                Math.PI / 2;
+
+                            return Math.cos(angle * 10) * radius; // * i/particles.length
+                        },
+                        y: (i) => {
+                            const angle =
+                                (i / particles.length) * Math.PI * 2 -
+                                Math.PI / 2;
+
+                            return Math.sin(angle * 10) * radius; // * i/particles.length
+                        },
+                        scale: 1.1,
+                        rotate: 2,
+                    },
+                    {
+                        duration: 30,
+                        ease: "sine",
+                        x: 0,
+                        y: 0,
+                        scale: 0,
+                        rotate: -1,
+                        stagger: { each: -0.3, repeat: -1 },
+                    },
+                    0,
+                )
+                .seek(100);
+
+            function draw() {
+                particles.sort((a, b) => a.scale - b.scale);
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach((p, i) => {
+                    ctx.translate(width / 2, height / 2);
+                    ctx.rotate(p.rotate);
+                    ctx.drawImage(
+                        p.img,
+                        p.x,
+                        p.y,
+                        p.img.width * p.scale,
+                        p.img.height * p.scale,
+                    );
+                    ctx.resetTransform();
+                });
+            }
+
+            window.addEventListener("resize", () => {
+                width = canvas.width = container.clientWidth;
+                height = canvas.height = container.clientHeight;
+                radius = Math.max(width, height);
+                tl.invalidate();
+            });
+        });
+    }
+</script>
