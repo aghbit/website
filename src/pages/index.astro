@@ -12,41 +12,59 @@ import BoardPill from "../components/BoardPill.astro";
 import Section from "../components/Section.astro";
 import Container from "../components/Container.astro";
 
-const sections = [
+interface ISubsection {
+    name: string;
+    description: string;
+}
+
+interface ISections {
+    name: string;
+    description: string;
+    subsections?: ISubsection[]
+}
+
+const sections: ISections[] = [
+    {
+        name: "START",
+        description:
+            "Blok sekcji składający się z 2 głównych elementów, które łączy jeden cel - zaoszczędzić naszym drogim studentom jak najwięcej ECTS-ów.",
+        subsections: [
+            {
+                name: "MATHS",
+                description:
+                    "Członkowie tej sekcji biorą \"na warsztat\" cztery potwory: Matematykę Dyskretną, Algebrę i Analizę Matematyczną.",
+            },
+            {
+                name: "CODING",
+                description:
+                    "Sekcja skupia się na jak najprzyjemniejszym wprowadzeniu was w świat algorytmiki i programowania. Polecamy ją szczególnie początkującym!",
+            },
+        ],
+    },
+    {
+        name: "BIT MATURA x DIAMENT",
+        description:
+            "Ta sekcja poświęcona jest uczniom ze szkół licealnych oraz technicznych. Organizujemy zajęcia przygotowujące naszych młodszych kolegów do egzaminu maturalnego z informatyki lub Olimpiady Informatycznej.",
+    },
+    {
+        name: "WEB",
+        description:
+            "Sekcja, na którą oko powinni mieć wszyscy pasjonaci aplikacji webowych. Zespół skupia się na realizacji wyznaczonego projektu, dlatego aby do nich dołączyć należy udowodnić swoje umiejętności podczas rekrutacji.",
+    },
+    {
+        name: "ALGO",
+        description:
+            "Blok dla pasjonatów algorytmiki, powołany by reprezentować nas na AMPPZ i CERC! Organizujemy też regularne sparingi i zajęcia stacjonarne dla osób początkujących, które znają już podstawy z OI/OIJ.",
+    },
     {
         name: "AI",
         description:
-            "Sekcja skupia się na przekazywaniu wiedzy z zakresu sztucznej inteligencji.",
+            "Omawiamy tu zagadnienia związane z szeroko pojętą Sztuczną Inteligencją, takie jak Machine Learning czy Sieci neuronowe. Jeśli chcecie postawić pierwsze kroki w tej dziedzinie, zachęcamy do udziału w zdalnych wykładach.",
     },
     {
-        name: "Algo Konkursy",
-        description:
-            "Sekcja skupia się na rozwiązywaniu zadań algorytmicznych oraz przygotowaniu do udziału w konkursach programistycznych.",
-    },
-    {
-        name: "Infra",
+        name: "INFRA",
         description:
             "Sekcja skupia się na zagadnieniach infrastruktury IT, pracy z systemem Linux oraz wdrażaniu aplikacji na serwery.",
-    },
-    {
-        name: "Web",
-        description:
-            "Sekcja skupia się na budowaniu aplikacji webowych oraz poznawaniu nowoczesnych technologii internetowych.",
-    },
-    {
-        name: "Algo",
-        description:
-            "Sekcja skupia się na wprowadzaniu do świata algorytmiki i nauce podstawowych pojęć programistycznych.",
-    },
-    {
-        name: "Maths",
-        description:
-            "Sekcja skupia się na przygotowaniu uczniów do matury z matematyki oraz wsparciu studentów na pierwszym roku studiów.",
-    },
-    {
-        name: "Fizyka",
-        description:
-            "Sekcja skupia się na pomocy w zaliczeniu fizyki na pierwszym i drugim roku studiów pod okiem starszych kolegów.",
     },
 ];
 
@@ -233,8 +251,8 @@ const navLinks = [
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                 {
-                    sections.map(({ name, description }) => (
-                        <BitSection name={name} description={description} />
+                    sections.map(({ name, description, subsections }) => (
+                        <BitSection name={name} description={description} subsections={subsections} />
                     ))
                 }
             </div>

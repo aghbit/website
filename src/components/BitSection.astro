@@ -1,8 +1,25 @@
 ---
-const { name, description } = Astro.props;
+const { name, description, subsections } = Astro.props;
+
+interface ISubsection {
+    name: string;
+    description: string;
+}
 ---
 
-<div class="bg-stone-100 rounded-lg p-6 flex flex-col gap-4">
+<div class={`bg-stone-100 rounded-lg p-6 flex flex-col gap-4 ${subsections ? 'sm:col-span-2 md:col-span-2' : ''}`}>
     <h3 class="text-xl">{name}</h3>
-    <p>{description}</p>
+
+    {description && <p>{description}</p>}
+
+    {subsections && subsections.length > 0 && (
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 h-full">
+            {subsections.map((sub: ISubsection) => (
+                <div class="bg-white rounded-lg p-4 flex flex-col gap-2">
+                    <h4 class="text-lg font-medium">{sub.name}</h4>
+                    <p class="text-sm">{sub.description}</p>
+                </div>
+            ))}
+        </div>
+    )}
 </div>
