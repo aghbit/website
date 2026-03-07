@@ -5,6 +5,9 @@ import bitLogo from "../assets/bit.svg";
 import aghLogo from "../assets/agh.svg";
 import informatykaLogo from "../assets/informatyka.svg";
 import inaugurationPhoto from "../assets/inauguracja.jpg";
+import hackathonPhoto from "../assets/hackathon.jpg";
+import ludziePhoto from "../assets/ludzie.jpg";
+import kaczkaPhoto from "../assets/kaczka.jpg";
 
 import Layout from "../layouts/Layout.astro";
 import BitSection from "../components/BitSection.astro";
@@ -12,41 +15,42 @@ import BoardPill from "../components/BoardPill.astro";
 import Section from "../components/Section.astro";
 import Container from "../components/Container.astro";
 
-const sections = [
+interface ISection {
+    name: string;
+    description: string;
+}
+
+const sections: ISection[] = [
+    {
+        name: "ALGO",
+        description:
+            "Algorytmika i programowanie konkurencyjne (AMPPZ, CERC!). Organizujemy sparingi i zajęcia dla znających już podstawy.",
+    },
     {
         name: "AI",
         description:
-            "Sekcja skupia się na przekazywaniu wiedzy z zakresu sztucznej inteligencji.",
+            "Machine Learning, sieci neuronowe i AI. Postaw z nami swoje pierwsze kroki w tej dziedzinie podczas zdalnych wykładów!",
+    },
+
+    {
+        name: "INFRA",
+        description:
+            "Infrastruktura IT w praktyce: tajniki pracy z Linuksem i wdrażanie aplikacji na serwery.",
     },
     {
-        name: "Algo Konkursy",
+        name: "WEB",
         description:
-            "Sekcja skupia się na rozwiązywaniu zadań algorytmicznych oraz przygotowaniu do udziału w konkursach programistycznych.",
+            "Dla pasjonatów apek webowych! Skupiamy się na konkretnym projekcie, dlatego wejściówką do sekcji jest rekrutacja ze skilla.",
     },
     {
-        name: "Infra",
+        name: "START",
         description:
-            "Sekcja skupia się na zagadnieniach infrastruktury IT, pracy z systemem Linux oraz wdrażaniu aplikacji na serwery.",
+            "Dwa zespoły połączone jednym, szczytnym celem: uratować Twoje punkty ECTS!",
     },
     {
-        name: "Web",
+        name: "BIT MATURA x DIAMENT",
         description:
-            "Sekcja skupia się na budowaniu aplikacji webowych oraz poznawaniu nowoczesnych technologii internetowych.",
-    },
-    {
-        name: "Algo",
-        description:
-            "Sekcja skupia się na wprowadzaniu do świata algorytmiki i nauce podstawowych pojęć programistycznych.",
-    },
-    {
-        name: "Maths",
-        description:
-            "Sekcja skupia się na przygotowaniu uczniów do matury z matematyki oraz wsparciu studentów na pierwszym roku studiów.",
-    },
-    {
-        name: "Fizyka",
-        description:
-            "Sekcja skupia się na pomocy w zaliczeniu fizyki na pierwszym i drugim roku studiów pod okiem starszych kolegów.",
+            "Zajęcia dla szkół średnich. Przygotowujemy do rozszerzonej matury z informatyki oraz Olimpiady Informatycznej.",
     },
 ];
 
@@ -102,16 +106,15 @@ const navLinks = [
     >
         <Container class="flex items-center justify-between m-auto py-4">
             <div class="flex items-center gap-4">
-                <a href="/" class="hover:opacity-80 transition-opacity">
+                <a href="/" class="transition-opacity inline-block">
                     <img
-                        class="h-8"
+                        class="h-6"
                         src={bitLogo.src}
                         alt="BIT Logo"
                         draggable="false"
                     />
                 </a>
             </div>
-
             <ul class="hidden md:flex items-center justify-end gap-8">
                 {
                     navLinks.map(({ label, href }) => (
@@ -160,7 +163,6 @@ const navLinks = [
             </button>
         </Container>
     </nav>
-
     <div
         id="mobile-menu"
         class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none md:hidden"
@@ -182,12 +184,11 @@ const navLinks = [
         <main>
             <Container class="m-auto relative flex justify-center">
                 <div
-                    class="py-16 flex flex-col gap-8 justify-center items-center h-180"
+                    class="py-16 flex flex-col gap-8 justify-center items-center h-256"
                 >
-                    <img class="w-45" src={bitLogo.src} />
-                    <span class="text-6xl font-medium text-center" id="slogan">
-                        Twoje wejście do <br />
-                        świata informatyki
+                    <span class="text-6xl font-medium" id="slogan">
+                        Studencka przestrzeń do wymiany wiedzy i testowania
+                        pomysłów.
                     </span>
                 </div>
             </Container>
@@ -196,42 +197,78 @@ const navLinks = [
             class="absolute bottom-0 left-0 right-0 mx-auto flex items-center justify-center h-12 gap-12 p-12"
         >
             <div class="w-24 flex justify-center">
-                <img class="h-6" src={bitLogo.src} />
+                <a href="/">
+                    <img class="h-6" src={bitLogo.src} />
+                </a>
             </div>
             <div class="w-24 flex justify-center">
-                <img class="h-16" src={aghLogo.src} />
+                <a href="https://www.agh.edu.pl/" target="_blank">
+                    <img class="h-16" src={aghLogo.src} />
+                </a>
             </div>
             <div class="w-24 flex justify-center">
-                <img class="h-16" src={informatykaLogo.src} />
+                <a
+                    href="https://www.informatyka.agh.edu.pl/pl/"
+                    target="_blank"
+                >
+                    <img class="h-16" src={informatykaLogo.src} />
+                </a>
             </div>
         </div>
     </div>
     <Section class="bg-stone-100" id="about">
-        <Container class="flex gap-8">
+        <Container class="grid gap-8 relative">
             <div class="flex flex-col gap-8">
                 <h2 class="text-2xl font-medium">O nas</h2>
-                <p class="text-xl">
-                    Koło naukowe BIT to przede wszystkim miejsce, gdzie studenci
-                    AGH mogą rozwijać swoje zainteresowania i się nimi dzielić.
-                    Znajdziemy tutaj ludzi zainteresowanych nowoczesnymi
-                    metodami tworzenia oprogramowania, aktualnymi technologiami
-                    webowymi, a także algorytmami czy sztuczną inteligencją.
+                <p class="text-xl max-w-200">
+                    W Kole Naukowym BIT studenci AGH wspólnie rozwijają i dzielą
+                    się swoimi pasjami. Skupiamy osoby zafascynowane nowoczesnym
+                    tworzeniem oprogramowania, technologiami webowymi,
+                    algorytmami oraz sztuczną inteligencją.
                 </p>
+            </div>
+        </Container>
+    </Section>
+    <Section class="p-0 bg-stone-100" id="about">
+        <Container
+            class="max-w-7xl p-0 grid gap-8 relative overflow-hidden h-172"
+        >
+            <div
+                class="absolute grid gap-2 grid-cols-2 grid-rows-3"
+                id="gallery"
+            >
+                <img
+                    class="rounded-lg h-64 w-full object-cover"
+                    src={kaczkaPhoto.src}
+                />
+                <img
+                    class="row-span-2 h-full w-full rounded-lg object-cover"
+                    src={inaugurationPhoto.src}
+                />
+                <img
+                    class="row-span-2 w-full h-full rounded-lg object-cover"
+                    src={hackathonPhoto.src}
+                />
+                <img
+                    class="h-64 w-full rounded-lg object-cover"
+                    src={ludziePhoto.src}
+                />
             </div>
         </Container>
     </Section>
     <Section id="groups">
         <Container class="flex flex-col gap-8">
             <h2 class="text-2xl font-medium">Sekcje</h2>
-            <p class="text-xl">
-                Oprócz rozwijania swoich pasji, dzielimy się też wiedzą z
-                zakresu studiów, prowadząc zajęcia wprowadzające w dziedziny
-                matematyki i informatyki dla osób, które wcześniej nie miały z
-                danymi zagadnieniami styczności. Wszystko po to, żeby wymienić
-                się doświadczeniem i szybciej oraz lepiej przygotować się na
-                zajęcia na uczelni.
+            <p class="text-xl max-w-200">
+                Poza realizacją własnych zainteresowań wspieramy się w nauce.
+                Organizujemy zajęcia z matematyki i informatyki dla
+                początkujących, aby wspólnie wymieniać się doświadczeniami i
+                skuteczniej przygotowywać do zajęć uniwersyteckich.
             </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-12"
+                id="sections"
+            >
                 {
                     sections.map(({ name, description }) => (
                         <BitSection name={name} description={description} />
@@ -288,20 +325,46 @@ const navLinks = [
     import gsap from "gsap";
     import { SplitText } from "gsap/SplitText";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+    gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
 
     // Animate slogan
-
-    gsap.registerPlugin(SplitText);
-    gsap.registerPlugin(ScrollTrigger);
 
     const split = SplitText.create("#slogan", {
         type: "words",
     });
 
     gsap.from(split.words, {
-        y: 100,
+        y: 50,
+        duration: 1,
         autoAlpha: 0,
         stagger: 0.08,
+        ease: "circ.out",
+    });
+
+    // Gallery
+
+    const gallery = document.querySelectorAll("#gallery > *");
+
+    gsap.from(gallery, {
+        scrollTrigger: "#gallery",
+        opacity: 0,
+        y: 50,
+        duration: 2,
+        stagger: 0.1,
+        ease: "power3.out",
+    });
+
+    // Sections
+    const sections = document.querySelectorAll("#sections > *");
+
+    gsap.from(sections, {
+        scrollTrigger: "#sections",
+        opacity: 0,
+        duration: 2,
+        stagger: 0.08,
+        ease: "power3.out",
     });
 
     // Animate board pills
@@ -320,7 +383,7 @@ const navLinks = [
         ease: "power3.out",
     });
 
-    // Bits
+    // Bg Canvas
 
     {
         const container = document.querySelector<HTMLDivElement>(
@@ -334,94 +397,14 @@ const navLinks = [
 
         let width = (canvas.width = container.clientWidth);
         let height = (canvas.height = container.clientHeight);
-        let radius = Math.max(width, height);
 
-        const particles = Array(99);
-
-        const images = ["/0.png", "/1.png"];
-
-        const loadImages = images.map((src) => {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.src = src;
-                img.onload = () => resolve(img);
-                img.onerror = reject;
-            });
-        });
-
-        Promise.all(loadImages).then((loadedImages) => {
-            for (let i = 0; i < particles.length; i++) {
-                particles[i] = {
-                    x: 0,
-                    y: 0,
-                    scale: 0,
-                    rotate: 0,
-                    img: loadedImages[i % loadedImages.length],
-                };
-            }
-
-            const tl = gsap
-                .timeline({ onUpdate: draw })
-                .fromTo(
-                    particles,
-                    {
-                        x: (i) => {
-                            const angle =
-                                (i / particles.length) * Math.PI * 2 -
-                                Math.PI / 2;
-
-                            return Math.cos(angle * 10) * radius; // * i/particles.length
-                        },
-                        y: (i) => {
-                            const angle =
-                                (i / particles.length) * Math.PI * 2 -
-                                Math.PI / 2;
-
-                            return Math.sin(angle * 10) * radius; // * i/particles.length
-                        },
-                        scale: 1.1,
-                        rotate: 2,
-                    },
-                    {
-                        duration: 30,
-                        ease: "sine",
-                        x: 0,
-                        y: 0,
-                        scale: 0,
-                        rotate: -1,
-                        stagger: { each: -0.3, repeat: -1 },
-                    },
-                    0,
-                )
-                .seek(100);
-
-            function draw() {
-                particles.sort((a, b) => a.scale - b.scale);
-                ctx.clearRect(0, 0, width, height);
-                particles.forEach((p, i) => {
-                    ctx.translate(width / 2, height / 2);
-                    ctx.rotate(p.rotate);
-                    ctx.drawImage(
-                        p.img,
-                        p.x,
-                        p.y,
-                        p.img.width * p.scale,
-                        p.img.height * p.scale,
-                    );
-                    ctx.resetTransform();
-                });
-            }
-
-            window.addEventListener("resize", () => {
-                width = canvas.width = container.clientWidth;
-                height = canvas.height = container.clientHeight;
-                radius = Math.max(width, height);
-                tl.invalidate();
-            });
+        window.addEventListener("resize", () => {
+            width = canvas.width = container.clientWidth;
+            height = canvas.height = container.clientHeight;
         });
     }
 
-    // Mobile menu
+    // Mobile menu (TODO: Move this to a separate component)
 
     const menuToggle = document.querySelector<HTMLElement>("#menu-toggle")!;
     const mobileMenu = document.querySelector<HTMLElement>("#mobile-menu")!;
@@ -480,7 +463,6 @@ const navLinks = [
         }
     });
 
-    // Handle closing when a link is clicked
     mobileLinks.forEach((link) => {
         link.addEventListener("click", () => {
             isMenuOpen = false;

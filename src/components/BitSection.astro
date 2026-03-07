@@ -1,8 +1,16 @@
 ---
 const { name, description } = Astro.props;
+
+interface ISubsection {
+    name: string;
+    description: string;
+}
 ---
 
-<div class="bg-stone-100 rounded-lg p-6 flex flex-col gap-4">
-    <h3 class="text-xl">{name}</h3>
-    <p>{description}</p>
+<div class="bg-stone-100 h-64 w-full rounded-lg flex p-6">
+    <div class="p-2 grow flex flex-col h-full gap-6">
+        <h3 class="text-xl font-medium">{name}</h3>
+
+        {description && <p>{description}</p>}
+    </div>
 </div>
