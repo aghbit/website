@@ -75,7 +75,7 @@
     window.addEventListener("mousemove", (event) => {
         // Normalize coordinates to -1 to +1
         mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Invert Y because screen Y is top-down
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
     });
 
     const swayIntensity = 0.2;

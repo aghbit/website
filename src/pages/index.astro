@@ -4,6 +4,7 @@ import "../styles/global.css";
 import bitLogo from "../assets/bit.svg";
 import aghLogo from "../assets/agh.svg";
 import informatykaLogo from "../assets/informatyka.svg";
+
 import inaugurationPhoto from "../assets/inauguracja.jpg";
 import hackathonPhoto from "../assets/hackathon.jpg";
 import ludziePhoto from "../assets/ludzie.jpg";
@@ -16,12 +17,12 @@ import Section from "../components/Section.astro";
 import Container from "../components/Container.astro";
 import BitTreeScene from "../components/BitTreeScene.astro";
 
-interface ISection {
+interface SectionItem {
     name: string;
     description: string;
 }
 
-const sections: ISection[] = [
+const sections: SectionItem[] = [
     {
         name: "ALGO",
         description:
@@ -191,7 +192,11 @@ const navLinks = [
             <div class="flex items-center justify-center h-12 gap-12">
                 <div class="w-2/5 flex justify-end">
                     <a href="/">
-                        <img class="w-14" src={bitLogo.src} />
+                        <img
+                            class="w-14"
+                            alt="Logo koła naukowego BIT"
+                            src={bitLogo.src}
+                        />
                     </a>
                 </div>
                 <div class="w-1/5 flex justify-center">
@@ -199,12 +204,16 @@ const navLinks = [
                         href="https://www.informatyka.agh.edu.pl/pl/"
                         target="_blank"
                     >
-                        <img class="w-36" src={informatykaLogo.src} />
+                        <img
+                            class="w-36"
+                            alt="Logo wydziału informatyki AGH"
+                            src={informatykaLogo.src}
+                        />
                     </a>
                 </div>
                 <div class="w-2/5 flex justify-start">
                     <a href="https://www.agh.edu.pl/" target="_blank">
-                        <img class="w-8" src={aghLogo.src} />
+                        <img class="w-8" alt="Logo AGH" src={aghLogo.src} />
                     </a>
                 </div>
             </div>
@@ -234,18 +243,22 @@ const navLinks = [
                 <img
                     class="rounded-lg h-64 w-full object-cover"
                     src={kaczkaPhoto.src}
+                    alt="Student szukający błędu w kodzie z żółtą kaczką"
                 />
                 <img
                     class="row-span-2 h-full w-full rounded-lg object-cover"
                     src={inaugurationPhoto.src}
+                    alt="Zdjęcie studentów biorących udział w inauguracji koła naukowego BIT w roku 2025/2026"
                 />
                 <img
                     class="row-span-2 w-full h-full rounded-lg object-cover"
                     src={hackathonPhoto.src}
+                    alt="Czterech członków zarządu koła pracujących przy laptopach podczas Hackathonu organizowanego przez koło naukowe BIT."
                 />
                 <img
                     class="h-64 w-full rounded-lg object-cover"
                     src={ludziePhoto.src}
+                    alt="Czterech studentów w koszulkach koła naukowego BIT analizujących wyniki projektu na bardzo dużym monitorze"
                 />
             </div>
         </Container>
