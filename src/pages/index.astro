@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 import "../styles/global.css";
 
 import bitLogo from "../assets/bit.svg";
@@ -240,24 +242,32 @@ const navLinks = [
                 class="absolute min-w-4xl grid gap-2 grid-cols-2 grid-rows-3"
                 id="gallery"
             >
-                <img
+                <Image
                     class="rounded-lg h-64 w-full object-cover"
-                    src={kaczkaPhoto.src}
+                    width={900}
+                    height={900}
+                    src={kaczkaPhoto}
                     alt="Student szukający błędu w kodzie z żółtą kaczką"
                 />
-                <img
+                <Image
+                    width={1000}
+                    height={1000}
                     class="row-span-2 h-full w-full rounded-lg object-cover"
-                    src={inaugurationPhoto.src}
+                    src={inaugurationPhoto}
                     alt="Zdjęcie studentów biorących udział w inauguracji koła naukowego BIT w roku 2025/2026"
                 />
-                <img
+                <Image
+                    width={900}
+                    height={900}
                     class="row-span-2 w-full h-full rounded-lg object-cover"
-                    src={hackathonPhoto.src}
+                    src={hackathonPhoto}
                     alt="Czterech członków zarządu koła pracujących przy laptopach podczas Hackathonu organizowanego przez koło naukowe BIT."
                 />
-                <img
+                <Image
+                    width={1000}
+                    height={1000}
                     class="h-64 w-full rounded-lg object-cover"
-                    src={ludziePhoto.src}
+                    src={ludziePhoto}
                     alt="Czterech studentów w koszulkach koła naukowego BIT analizujących wyniki projektu na bardzo dużym monitorze"
                 />
             </div>
