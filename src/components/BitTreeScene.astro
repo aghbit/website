@@ -10,17 +10,24 @@
     }
 
     const container = document.querySelector("#bit-scene-canvas-container")!;
-    const canvas = document.querySelector("#canvas")!;
+    const canvas = document.querySelector<HTMLCanvasElement>("#canvas")!;
 
     const scene = new THREE.Scene();
-
     const renderer = new THREE.WebGLRenderer({
         canvas,
         antialias: true,
         alpha: true,
     });
 
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    const ratio = window.devicePixelRatio;
+
+    renderer.setSize(
+        container.clientWidth * ratio,
+        container.clientHeight * ratio,
+    );
+
+    canvas.style.width = `${container.clientWidth}px`;
+    canvas.style.height = `${container.clientHeight}px`;
 
     window.myThreeRenderer = renderer;
 
@@ -32,10 +39,6 @@
     );
     camera.position.z = 2;
     camera.position.y = 40;
-
-    // 3. Lighting (Combining Ambient + Directional for depth)
-    const ambientLight = new THREE.AmbientLight(0xfcc964, 5); // Soft base light
-    scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
     directionalLight.position.set(-1, 2, 3);
