@@ -1,0 +1,123 @@
+<canvas class="-z-50" id="canvas"></canvas>
+
+<script>
+    import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+    if (window.myThreeRenderer) {
+        window.myThreeRenderer.dispose();
+        window.myThreeRenderer = null;
+    }
+
+    const container = document.querySelector("#bit-scene-canvas-container")!;
+    const canvas = document.querySelector("#canvas")!;
+
+    const scene = new THREE.Scene();
+
+    const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+    });
+
+    renderer.setSize(container.clientWidth, container.clientHeight);
+
+    window.myThreeRenderer = renderer;
+
+    const camera = new THREE.PerspectiveCamera(
+        30,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000,
+    );
+    camera.position.z = 2;
+    camera.position.y = 40;
+
+    // 3. Lighting (Combining Ambient + Directional for depth)
+    const ambientLight = new THREE.AmbientLight(0xfcc964, 5); // Soft base light
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+    directionalLight.position.set(-1, 2, 3);
+    scene.add(directionalLight);
+
+    // Load BIT logo
+
+    const loader = new GLTFLoader();
+    let bitLogoModel: THREE.Group | null = null;
+
+    loader.load(
+        "/models/bit.glb",
+        (gltf) => {
+            bitLogoModel = gltf.scene;
+            bitLogoModel.rotation.x = -0.3;
+            scene.add(bitLogoModel);
+        },
+        undefined,
+        (err) => console.error(err),
+    );
+
+    window.addEventListener("resize", () => {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    });
+
+    const targetRotationY = 0.4;
+    const lerpFactor = 0.15; // Adjust this: 0.1 is fast/snappy, 0.02 is slow/smooth
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    window.addEventListener("mousemove", (event) => {
+        // Normalize coordinates to -1 to +1
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Invert Y because screen Y is top-down
+    });
+
+    const swayIntensity = 0.2;
+    const maxWidth = 800;
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        const cameraZoomProportion =
+            maxWidth / Math.min(container.clientWidth, maxWidth);
+
+        camera.position.z = THREE.MathUtils.lerp(
+            camera.position.z,
+            cameraZoomProportion * 1.5,
+            lerpFactor,
+        );
+
+        // Lerp the camera position toward the target based on mouse
+        camera.position.x = THREE.MathUtils.lerp(
+            camera.position.x,
+            mouseX * swayIntensity,
+            lerpFactor,
+        );
+
+        camera.position.y = THREE.MathUtils.lerp(
+            camera.position.y,
+            mouseY * swayIntensity,
+            lerpFactor,
+        );
+
+        camera.lookAt(0, 0, 0);
+
+        if (bitLogoModel) {
+            bitLogoModel.rotation.y = THREE.MathUtils.lerp(
+                bitLogoModel.rotation.x,
+                targetRotationY,
+                lerpFactor,
+            );
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+</script>

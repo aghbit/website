@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
-* {
+html {
+    scroll-padding-top: 64px;
     scroll-behavior: smooth;
+    @apply text-stone-900;
 }
 
 @font-face {

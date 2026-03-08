@@ -14,6 +14,7 @@ import BitSection from "../components/BitSection.astro";
 import BoardPill from "../components/BoardPill.astro";
 import Section from "../components/Section.astro";
 import Container from "../components/Container.astro";
+import BitTreeScene from "../components/BitTreeScene.astro";
 
 interface ISection {
     name: string;
@@ -24,33 +25,32 @@ const sections: ISection[] = [
     {
         name: "ALGO",
         description:
-            "Algorytmika i programowanie konkurencyjne (AMPPZ, CERC!). Organizujemy sparingi i zajęcia dla znających już podstawy.",
+            "Dla pasjonatów algorytmiki. Reprezentujemy nas na AMPPZ i CERC oraz prowadzimy sparingi i zajęcia dla osób ze znajomością podstaw OI/OIJ.",
     },
     {
         name: "AI",
         description:
-            "Machine Learning, sieci neuronowe i AI. Postaw z nami swoje pierwsze kroki w tej dziedzinie podczas zdalnych wykładów!",
+            "Zgłębiamy AI, Machine Learning i sieci neuronowe. Zapraszamy na zdalne wykłady, idealne na start przygody z tą dziedziną.",
     },
-
     {
         name: "INFRA",
         description:
-            "Infrastruktura IT w praktyce: tajniki pracy z Linuksem i wdrażanie aplikacji na serwery.",
+            "Zajmujemy się infrastrukturą IT, pracą z systemem Linux oraz wdrażaniem aplikacji na serwery.",
     },
     {
         name: "WEB",
         description:
-            "Dla pasjonatów apek webowych! Skupiamy się na konkretnym projekcie, dlatego wejściówką do sekcji jest rekrutacja ze skilla.",
+            "Dla pasjonatów aplikacji webowych. Realizujemy wspólne projekty oparte o technologie webowe.",
     },
     {
         name: "START",
         description:
-            "Dwa zespoły połączone jednym, szczytnym celem: uratować Twoje punkty ECTS!",
+            "Wspieramy studentów w walce o cenne ECTS-y, oferując pomoc w zakresie matematyki i podstaw programowania.",
     },
     {
         name: "BIT MATURA x DIAMENT",
         description:
-            "Zajęcia dla szkół średnich. Przygotowujemy do rozszerzonej matury z informatyki oraz Olimpiady Informatycznej.",
+            "Przygotowujemy uczniów szkół średnich do matury z informatyki oraz udziału w Olimpiadzie Informatycznej.",
     },
 ];
 
@@ -102,9 +102,9 @@ const navLinks = [
 
 <Layout>
     <nav
-        class="sticky top-0 bg-white/70 z-60 backdrop-blur-md border-b border-stone-200/50"
+        class="sticky h-16 top-0 bg-white/95 z-60 backdrop-blur-sm border-b border-stone-100"
     >
-        <Container class="flex items-center justify-between m-auto py-4">
+        <Container class="flex h-full items-center justify-between m-auto py-4">
             <div class="flex items-center gap-4">
                 <a href="/" class="transition-opacity inline-block">
                     <img
@@ -131,7 +131,7 @@ const navLinks = [
             </ul>
             <button
                 id="menu-toggle"
-                class="md:hidden p-2 text-stone-600 relative z-70"
+                class="md:hidden p-2 relative z-70"
                 aria-label="Toggle Menu"
             >
                 <svg
@@ -169,53 +169,47 @@ const navLinks = [
     >
         {
             navLinks.map(({ label, href }) => (
-                <a
-                    href={href}
-                    class="mobile-nav-link text-3xl font-medium text-stone-800"
-                >
+                <a href={href} class="mobile-nav-link text-3xl font-medium ">
                     {label}
                 </a>
             ))
         }
     </div>
-    <div class="relative overflow-hidden" id="bits-canvas-container">
-        <canvas class="absolute top-0 left-0 -z-50 opacity-5" id="bits-canvas"
-        ></canvas>
-        <main>
-            <Container class="m-auto relative flex justify-center">
-                <div
-                    class="py-16 flex flex-col gap-8 justify-center items-center h-256"
-                >
-                    <span class="text-6xl font-medium" id="slogan">
-                        Studencka przestrzeń do wymiany wiedzy i testowania
-                        pomysłów.
-                    </span>
-                </div>
-            </Container>
-        </main>
-        <div
-            class="absolute bottom-0 left-0 right-0 mx-auto flex items-center justify-center h-12 gap-12 p-12"
+    <main class="h-[calc(100vh-64px)] flex flex-col">
+        <Container
+            class="m-auto relative flex flex-col justify-center h-full gap-12 py-48 sm:py-24"
         >
-            <div class="w-24 flex justify-center">
-                <a href="/">
-                    <img class="h-6" src={bitLogo.src} />
-                </a>
+            <h1
+                class="text-5xl sm:text-6xl font-medium text-center"
+                id="slogan"
+            >
+                Studencka przestrzeń do wymiany wiedzy i testowania pomysłów.
+            </h1>
+            <div class="h-128 w-full" id="bit-scene-canvas-container">
+                <BitTreeScene />
             </div>
-            <div class="w-24 flex justify-center">
-                <a href="https://www.agh.edu.pl/" target="_blank">
-                    <img class="h-16" src={aghLogo.src} />
-                </a>
+            <div class="flex items-center justify-center h-12 gap-12">
+                <div class="w-2/5 flex justify-end">
+                    <a href="/">
+                        <img class="w-14" src={bitLogo.src} />
+                    </a>
+                </div>
+                <div class="w-1/5 flex justify-center">
+                    <a
+                        href="https://www.informatyka.agh.edu.pl/pl/"
+                        target="_blank"
+                    >
+                        <img class="w-36" src={informatykaLogo.src} />
+                    </a>
+                </div>
+                <div class="w-2/5 flex justify-start">
+                    <a href="https://www.agh.edu.pl/" target="_blank">
+                        <img class="w-8" src={aghLogo.src} />
+                    </a>
+                </div>
             </div>
-            <div class="w-24 flex justify-center">
-                <a
-                    href="https://www.informatyka.agh.edu.pl/pl/"
-                    target="_blank"
-                >
-                    <img class="h-16" src={informatykaLogo.src} />
-                </a>
-            </div>
-        </div>
-    </div>
+        </Container>
+    </main>
     <Section class="bg-stone-100" id="about">
         <Container class="grid gap-8 relative">
             <div class="flex flex-col gap-8">
@@ -231,10 +225,10 @@ const navLinks = [
     </Section>
     <Section class="p-0 bg-stone-100" id="about">
         <Container
-            class="max-w-7xl p-0 grid gap-8 relative overflow-hidden h-172"
+            class="max-w-7xl overflow-y-hidden flex justify-center p-0 gap-8 relative overflow-hidden h-172"
         >
             <div
-                class="absolute grid gap-2 grid-cols-2 grid-rows-3"
+                class="absolute min-w-4xl grid gap-2 grid-cols-2 grid-rows-3"
                 id="gallery"
             >
                 <img
@@ -277,11 +271,11 @@ const navLinks = [
             </div>
         </Container>
     </Section>
-    <Section class="bg-stone-800 board-scroll-trigger" id="board">
+    <Section class="bg-stone-900 board-scroll-trigger" id="board">
         <Container class="flex flex-col gap-8">
             <h2 class="text-2xl font-medium text-white">Zarząd</h2>
             <div
-                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2"
+                class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
                 id="board-grid"
             >
                 <BoardPill head name={boardHead} />
@@ -298,15 +292,14 @@ const navLinks = [
                 {
                     footerGroups.map((group) => (
                         <div class="flex flex-col gap-4">
-                            <h3 class="font-medium text-stone-900 ">
-                                {group.title}
-                            </h3>
+                            <h3 class="font-medium">{group.title}</h3>
                             <ul class="flex flex-col gap-2">
                                 {group.links.map((link) => (
                                     <li>
                                         <a
                                             href={link.href}
                                             class="text-stone-600 hover:text-black transition-colors"
+                                            target="_blank"
                                         >
                                             {link.label}
                                         </a>
@@ -351,7 +344,7 @@ const navLinks = [
         scrollTrigger: "#gallery",
         opacity: 0,
         y: 50,
-        duration: 2,
+        duration: 0.5,
         stagger: 0.1,
         ease: "power3.out",
     });
@@ -360,9 +353,12 @@ const navLinks = [
     const sections = document.querySelectorAll("#sections > *");
 
     gsap.from(sections, {
-        scrollTrigger: "#sections",
+        scrollTrigger: {
+            trigger: "#sections",
+            start: "top 95%",
+        },
         opacity: 0,
-        duration: 2,
+        duration: 1,
         stagger: 0.08,
         ease: "power3.out",
     });
@@ -372,9 +368,12 @@ const navLinks = [
     const pills = document.querySelectorAll("#board-grid > *");
 
     gsap.from(pills, {
-        scrollTrigger: ".board-scroll-trigger",
+        scrollTrigger: {
+            trigger: ".board-scroll-trigger",
+            start: "top 95%",
+        },
         opacity: 0,
-        duration: 2,
+        duration: 1,
         stagger: {
             each: 0.05,
             from: "random",
@@ -382,27 +381,6 @@ const navLinks = [
         },
         ease: "power3.out",
     });
-
-    // Bg Canvas
-
-    {
-        const container = document.querySelector<HTMLDivElement>(
-            "#bits-canvas-container",
-        )!;
-
-        const canvas =
-            document.querySelector<HTMLCanvasElement>("#bits-canvas")!;
-
-        const ctx = canvas.getContext("2d")!;
-
-        let width = (canvas.width = container.clientWidth);
-        let height = (canvas.height = container.clientHeight);
-
-        window.addEventListener("resize", () => {
-            width = canvas.width = container.clientWidth;
-            height = canvas.height = container.clientHeight;
-        });
-    }
 
     // Mobile menu (TODO: Move this to a separate component)
 
