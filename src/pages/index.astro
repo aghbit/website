@@ -188,11 +188,11 @@ const navLinks = [
             >
                 Studencka przestrzeń do wymiany wiedzy i testowania pomysłów.
             </h1>
-            <div class="h-128 w-full" id="bit-scene-canvas-container">
+            <div class="h-64 md:h-128 w-full" id="bit-scene-canvas-container">
                 <BitTreeScene />
             </div>
             <div class="flex items-center justify-center h-12 gap-12">
-                <div class="w-2/5 flex justify-end">
+                <div class="w-1/3 flex justify-end">
                     <a href="/">
                         <img
                             class="w-14"
@@ -201,7 +201,7 @@ const navLinks = [
                         />
                     </a>
                 </div>
-                <div class="w-1/5 flex justify-center">
+                <div class="w-1/3 flex justify-center">
                     <a
                         href="https://www.informatyka.agh.edu.pl/pl/"
                         target="_blank"
@@ -213,7 +213,7 @@ const navLinks = [
                         />
                     </a>
                 </div>
-                <div class="w-2/5 flex justify-start">
+                <div class="w-1/3 flex justify-start">
                     <a href="https://www.agh.edu.pl/" target="_blank">
                         <img class="w-8" alt="Logo AGH" src={aghLogo.src} />
                     </a>
@@ -223,9 +223,9 @@ const navLinks = [
     </main>
     <Section class="bg-stone-100" id="about">
         <Container class="grid gap-8 relative">
-            <div class="flex flex-col gap-8">
+            <div class="flex flex-col gap-4">
                 <h2 class="text-2xl font-medium">O nas</h2>
-                <p class="text-xl max-w-200">
+                <p class="text-xl max-w-200 font-sans-snd">
                     W Kole Naukowym BIT studenci AGH wspólnie rozwijają i dzielą
                     się swoimi pasjami. Skupiamy osoby zafascynowane nowoczesnym
                     tworzeniem oprogramowania, technologiami webowymi,
@@ -274,9 +274,9 @@ const navLinks = [
         </Container>
     </Section>
     <Section id="groups">
-        <Container class="flex flex-col gap-8">
+        <Container class="flex flex-col gap-4">
             <h2 class="text-2xl font-medium">Sekcje</h2>
-            <p class="text-xl max-w-200">
+            <p class="text-xl max-w-200 font-sans-snd">
                 Poza realizacją własnych zainteresowań wspieramy się w nauce.
                 Organizujemy zajęcia z matematyki i informatyki dla
                 początkujących, aby wspólnie wymieniać się doświadczeniami i
@@ -364,7 +364,10 @@ const navLinks = [
     const gallery = document.querySelectorAll("#gallery > *");
 
     gsap.from(gallery, {
-        scrollTrigger: "#gallery",
+        scrollTrigger: {
+            trigger: "#gallery",
+            start: "top 70%",
+        },
         opacity: 0,
         y: 50,
         duration: 0.5,
@@ -378,7 +381,7 @@ const navLinks = [
     gsap.from(sections, {
         scrollTrigger: {
             trigger: "#sections",
-            start: "top 95%",
+            start: "top 70%",
         },
         opacity: 0,
         duration: 1,
@@ -393,7 +396,7 @@ const navLinks = [
     gsap.from(pills, {
         scrollTrigger: {
             trigger: ".board-scroll-trigger",
-            start: "top 95%",
+            start: "top 85%",
         },
         opacity: 0,
         duration: 1,

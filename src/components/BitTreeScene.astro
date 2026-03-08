@@ -37,7 +37,7 @@
         0.1,
         1000,
     );
-    camera.position.z = 2;
+    camera.position.z = 1.7;
     camera.position.y = 40;
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
@@ -61,12 +61,17 @@
     );
 
     window.addEventListener("resize", () => {
-        const width = container.clientWidth;
-        const height = container.clientHeight;
+        const ratio = window.devicePixelRatio;
+
+        const width = container.clientWidth * ratio;
+        const height = container.clientHeight * ratio;
 
         renderer.setSize(width, height);
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
+
+        canvas.style.width = `${container.clientWidth}px`;
+        canvas.style.height = `${container.clientHeight}px`;
     });
 
     const targetRotationY = 0.4;
@@ -82,19 +87,9 @@
     });
 
     const swayIntensity = 0.2;
-    const maxWidth = 800;
 
     function animate() {
         requestAnimationFrame(animate);
-
-        const cameraZoomProportion =
-            maxWidth / Math.min(container.clientWidth, maxWidth);
-
-        camera.position.z = THREE.MathUtils.lerp(
-            camera.position.z,
-            cameraZoomProportion * 1.5,
-            lerpFactor,
-        );
 
         // Lerp the camera position toward the target based on mouse
         camera.position.x = THREE.MathUtils.lerp(

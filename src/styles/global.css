@@ -16,6 +16,17 @@ html {
     font-display: swap;
 }
 
+@font-face {
+    font-family: "Exo";
+    src: url("/fonts/Exo-VariableFont_wght.ttf") format("truetype");
+
+    font-weight: 100 900;
+    font-stretch: 50% 200%;
+    font-style: normal;
+    font-display: swap;
+}
+
 @theme {
-    --font-sans: "Geist";
+    --font-sans: "Exo", sans-serif;
+    --font-sans-snd: "Geist", sans-serif;
 }
