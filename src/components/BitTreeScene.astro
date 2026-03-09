@@ -50,7 +50,7 @@
     let bitLogoModel: THREE.Group | null = null;
 
     loader.load(
-        "/models/bit.glb",
+        `/models/bit.glb`,
         (gltf) => {
             bitLogoModel = gltf.scene;
             bitLogoModel.rotation.x = -0.3;
