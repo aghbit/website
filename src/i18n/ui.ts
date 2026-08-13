@@ -52,9 +52,9 @@ export const ui = {
     "lang.switch": "Zmień język",
   },
   en: {
-    "meta.title": "BIT — AGH Research Club",
+    "meta.title": "BIT — AGH Student Scientific Group",
     "meta.description":
-      "A student space for sharing knowledge and trying out ideas. The BIT Research Club at AGH University of Krakow.",
+      "A student space for sharing knowledge and trying out ideas. The BIT student scientific group at AGH University of Krakow.",
     "nav.about": "About us",
     "nav.activity": "What we do",
     "nav.board": "Board",
@@ -62,20 +62,20 @@ export const ui = {
     "nav.menu": "Open menu",
     "hero.slogan":
       "A student space for sharing knowledge and trying out ideas.",
-    "logo.bit": "BIT research club logo",
+    "logo.bit": "BIT student scientific group logo",
     "logo.faculty": "AGH Faculty of Computer Science logo",
     "logo.agh": "AGH logo",
     "about.title": "About us",
     "about.body":
-      "At the BIT Research Club, AGH students develop and share their passions together. We bring together people fascinated by modern software development, web technologies, algorithms, and artificial intelligence.",
+      "At the BIT student scientific group, AGH students develop and share their passions together. We bring together people fascinated by modern software development, web technologies, algorithms, and artificial intelligence.",
     "gallery.duck":
       "A student looking for a bug in code with a yellow rubber duck",
     "gallery.inauguration":
-      "Students taking part in the BIT research club inauguration in the 2025/2026 academic year",
+      "Students taking part in the BIT student scientific group inauguration in the 2025/2026 academic year",
     "gallery.hackathon":
-      "Four board members working on laptops during a hackathon organized by the BIT research club.",
+      "Four board members working on laptops during a hackathon organized by the BIT student scientific group.",
     "gallery.people":
-      "Four students in BIT research club T-shirts analyzing project results on a very large monitor",
+      "Four students in BIT student scientific group T-shirts analyzing project results on a very large monitor",
     "sections.title": "Sections",
     "sections.body":
       "Besides pursuing our own interests, we support each other in our studies. We organize mathematics and computer science classes for beginners so we can share experience and prepare more effectively for university courses.",
