@@ -6,6 +6,40 @@ html {
     @apply text-stone-900;
 }
 
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: vt-fade-out 280ms ease-out both;
+}
+
+::view-transition-new(root) {
+    animation: vt-fade-in 320ms ease-in both;
+}
+
+@keyframes vt-fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes vt-fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+html:active-view-transition {
+    scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
+}
+
 @font-face {
     font-family: "Geist";
     src: url("/fonts/Geist-VariableFont_wght.ttf") format("truetype");
