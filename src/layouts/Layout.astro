@@ -1,11 +1,41 @@
+---
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+
+import { defaultLang, languages, type Lang } from "../i18n/ui";
+import { isLang, useTranslations } from "../i18n/utils";
+
+const lang: Lang = isLang(Astro.currentLocale)
+    ? Astro.currentLocale
+    : defaultLang;
+const t = useTranslations(lang);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>BIT</title>
+        <title>{t("meta.title")}</title>
+        <meta name="description" content={t("meta.description")} />
+        <link rel="canonical" href={canonicalURL.href} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        {
+            Object.keys(languages).map((locale) => (
+                <link
+                    rel="alternate"
+                    hreflang={locale}
+                    href={getAbsoluteLocaleUrl(locale)}
+                />
+            ))
+        }
+        <link
+            rel="alternate"
+            hreflang="x-default"
+            href={getAbsoluteLocaleUrl(defaultLang)}
+        />
     </head>
     <body>
         <slot />

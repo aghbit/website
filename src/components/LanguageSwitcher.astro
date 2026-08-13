@@ -1,0 +1,32 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+import { defaultLang, languages, type Lang } from "../i18n/ui";
+import { isLang, useTranslations } from "../i18n/utils";
+
+const currentLocale: Lang = isLang(Astro.currentLocale)
+    ? Astro.currentLocale
+    : defaultLang;
+const t = useTranslations(currentLocale);
+---
+
+<div class="flex items-center gap-2" role="group" aria-label={t("lang.switch")}>
+    {
+        Object.entries(languages).map(([locale, label]) => (
+            <a
+                href={getRelativeLocaleUrl(locale)}
+                hreflang={locale}
+                lang={locale}
+                aria-current={currentLocale === locale ? "page" : undefined}
+                class:list={[
+                    "text-sm font-medium transition-colors",
+                    currentLocale === locale
+                        ? "text-black"
+                        : "text-stone-400 hover:text-black",
+                ]}
+            >
+                {label}
+            </a>
+        ))
+    }
+</div>
