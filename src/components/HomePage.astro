@@ -1,0 +1,475 @@
+---
+import { Image } from "astro:assets";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+import "../styles/global.css";
+
+import bitLogo from "../assets/bit.svg";
+import aghLogo from "../assets/agh.svg";
+import informatykaLogo from "../assets/informatyka.svg";
+
+import inaugurationPhoto from "../assets/inauguracja.jpg";
+import hackathonPhoto from "../assets/hackathon.jpg";
+import ludziePhoto from "../assets/ludzie.jpg";
+import kaczkaPhoto from "../assets/kaczka.jpg";
+
+import Layout from "../layouts/Layout.astro";
+import BitSection from "./BitSection.astro";
+import BoardPill from "./BoardPill.astro";
+import Section from "./Section.astro";
+import Container from "./Container.astro";
+import BitTreeScene from "./BitTreeScene.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+import { defaultLang, type Lang } from "../i18n/ui";
+import { isLang, useTranslations } from "../i18n/utils";
+
+interface SectionItem {
+    name: string;
+    description: string;
+}
+
+const lang: Lang = isLang(Astro.currentLocale)
+    ? Astro.currentLocale
+    : defaultLang;
+const t = useTranslations(lang);
+const homeHref = getRelativeLocaleUrl(lang);
+
+const sections: SectionItem[] = [
+    { name: "ALGO", description: t("section.algo") },
+    { name: "AI", description: t("section.ai") },
+    { name: "INFRA", description: t("section.infra") },
+    { name: "WEB", description: t("section.web") },
+    { name: "START", description: t("section.start") },
+];
+
+const boardHead = "Madzia Śmietana";
+
+const board = [
+    "Sebastian Flajszer",
+    "Mateusz Kursa",
+    "Michał Dudek",
+    "Julian Dworzycki",
+    "Wiktor Baran",
+    "Bartosz Kasperski",
+    "Emilia Skalny",
+    "Fabian Bicca",
+    "Franek Zięba",
+    "Kacper Wyczawski",
+];
+
+const footerGroups = [
+    {
+        title: t("footer.documents"),
+        links: [{ label: t("footer.statute"), href: "/statut.pdf" }],
+    },
+    {
+        title: t("footer.social"),
+        links: [
+            { label: "Facebook", href: "https://www.facebook.com/knbit" },
+            { label: "GitHub", href: "https://github.com/aghbit" },
+        ],
+    },
+    {
+        title: t("footer.contact"),
+        links: [
+            {
+                label: "kontakt@knbit.edu.pl",
+                href: "mailto:kontakt@knbit.edu.pl",
+            },
+        ],
+    },
+];
+
+const navLinks = [
+    { label: t("nav.about"), href: "#about" },
+    { label: t("nav.activity"), href: "#groups" },
+    { label: t("nav.board"), href: "#board" },
+    { label: t("nav.contact"), href: "#contact" },
+];
+---
+
+<Layout>
+    <nav
+        class="sticky h-16 top-0 bg-white/95 z-60 backdrop-blur-sm border-b border-stone-100"
+    >
+        <Container class="flex h-full items-center justify-between m-auto py-4">
+            <div class="flex items-center gap-4">
+                <a href={homeHref} class="transition-opacity inline-block">
+                    <img
+                        class="h-6"
+                        src={bitLogo.src}
+                        alt="BIT Logo"
+                        draggable="false"
+                    />
+                </a>
+            </div>
+            <div class="flex items-center gap-8">
+                <ul class="hidden md:flex items-center justify-end gap-8">
+                    {
+                        navLinks.map(({ label, href }) => (
+                            <li>
+                                <a
+                                    href={href}
+                                    class="nav-link text-stone-600 hover:text-black transition-colors font-medium"
+                                >
+                                    {label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+                <LanguageSwitcher />
+                <button
+                    id="menu-toggle"
+                    class="md:hidden p-2 relative z-70"
+                    aria-label={t("nav.menu")}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            class="line-top"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16"></path>
+                        <path
+                            class="line-mid"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 12h16"></path>
+                        <path
+                            class="line-bot"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </Container>
+    </nav>
+    <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none md:hidden"
+    >
+        {
+            navLinks.map(({ label, href }) => (
+                <a href={href} class="mobile-nav-link text-3xl font-medium ">
+                    {label}
+                </a>
+            ))
+        }
+    </div>
+    <main class="h-[calc(100vh-64px)] flex flex-col">
+        <Container
+            class="m-auto relative flex flex-col justify-center h-svh gap-12 py-48 sm:py-24"
+        >
+            <h1
+                class="text-4xl sm:text-6xl font-medium text-center"
+                id="slogan"
+            >
+                {t("hero.slogan")}
+            </h1>
+            <div class="h-64 md:h-128 w-full" id="bit-scene-canvas-container">
+                <BitTreeScene />
+            </div>
+            <div class="flex items-center justify-center h-12 gap-12">
+                <div class="w-1/3 flex justify-end">
+                    <a href={homeHref}>
+                        <img
+                            class="w-14"
+                            alt={t("logo.bit")}
+                            src={bitLogo.src}
+                        />
+                    </a>
+                </div>
+                <div class="w-1/3 flex justify-center">
+                    <a
+                        href={
+                            lang === "en"
+                                ? "https://www.informatyka.agh.edu.pl/en/"
+                                : "https://www.informatyka.agh.edu.pl/pl/"
+                        }
+                        target="_blank"
+                    >
+                        <img
+                            class="w-36"
+                            alt={t("logo.faculty")}
+                            src={informatykaLogo.src}
+                        />
+                    </a>
+                </div>
+                <div class="w-1/3 flex justify-start">
+                    <a
+                        href={
+                            lang === "en"
+                                ? "https://www.agh.edu.pl/en"
+                                : "https://www.agh.edu.pl/"
+                        }
+                        target="_blank"
+                    >
+                        <img
+                            class="w-8"
+                            alt={t("logo.agh")}
+                            src={aghLogo.src}
+                        />
+                    </a>
+                </div>
+            </div>
+        </Container>
+    </main>
+    <Section class="bg-stone-100" id="about">
+        <Container class="grid gap-8 relative">
+            <div class="flex flex-col gap-4">
+                <h2 class="text-2xl font-medium">{t("about.title")}</h2>
+                <p class="text-xl max-w-200 font-sans-snd">
+                    {t("about.body")}
+                </p>
+            </div>
+        </Container>
+    </Section>
+    <Section class="p-0 bg-stone-100" id="about">
+        <Container
+            class="max-w-5xl overflow-y-hidden flex justify-center p-0 gap-8 relative overflow-hidden h-164"
+        >
+            <div
+                class="absolute min-w-2xl grid gap-2 grid-cols-2 grid-rows-3"
+                id="gallery"
+            >
+                <Image
+                    class="rounded-lg h-64 w-full object-cover"
+                    width={900}
+                    height={900}
+                    src={kaczkaPhoto}
+                    alt={t("gallery.duck")}
+                />
+                <Image
+                    width={1000}
+                    height={1000}
+                    class="row-span-2 h-full w-full rounded-lg object-cover"
+                    src={inaugurationPhoto}
+                    alt={t("gallery.inauguration")}
+                />
+                <Image
+                    width={900}
+                    height={900}
+                    class="row-span-2 w-full h-full rounded-lg object-cover"
+                    src={hackathonPhoto}
+                    alt={t("gallery.hackathon")}
+                />
+                <Image
+                    width={1000}
+                    height={1000}
+                    class="h-64 w-full rounded-lg object-cover"
+                    src={ludziePhoto}
+                    alt={t("gallery.people")}
+                />
+            </div>
+        </Container>
+    </Section>
+    <Section id="groups">
+        <Container class="flex flex-col gap-4">
+            <h2 class="text-2xl font-medium">{t("sections.title")}</h2>
+            <p class="text-xl max-w-200 font-sans-snd">
+                {t("sections.body")}
+            </p>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-12"
+                id="sections"
+            >
+                {
+                    sections.map(({ name, description }) => (
+                        <BitSection name={name} description={description} />
+                    ))
+                }
+            </div>
+        </Container>
+    </Section>
+    <Section class="bg-stone-900 board-scroll-trigger" id="board">
+        <Container class="flex flex-col gap-8">
+            <h2 class="text-2xl font-medium text-white">{t("board.title")}</h2>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
+                id="board-grid"
+            >
+                <BoardPill head name={boardHead} />
+                {board.map((name) => <BoardPill name={name} />)}
+            </div>
+        </Container>
+    </Section>
+    <Section>
+        <Container>
+            <footer
+                class="grid grid-cols-1 md:grid-cols-3 gap-12 py-16"
+                id="contact"
+            >
+                {
+                    footerGroups.map((group) => (
+                        <div class="flex flex-col gap-4">
+                            <h3 class="font-medium">{group.title}</h3>
+                            <ul class="flex flex-col gap-2">
+                                {group.links.map((link) => (
+                                    <li>
+                                        <a
+                                            href={link.href}
+                                            class="text-stone-600 hover:text-black transition-colors"
+                                            target="_blank"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
+            </footer>
+        </Container>
+    </Section>
+</Layout>
+
+<script>
+    import gsap from "gsap";
+    import { SplitText } from "gsap/SplitText";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+    gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
+
+    // Animate slogan
+
+    const split = SplitText.create("#slogan", {
+        type: "words",
+    });
+
+    gsap.from(split.words, {
+        y: 50,
+        duration: 1,
+        autoAlpha: 0,
+        stagger: 0.08,
+        ease: "circ.out",
+    });
+
+    // Gallery
+
+    const gallery = document.querySelectorAll("#gallery > *");
+
+    gsap.from(gallery, {
+        scrollTrigger: {
+            trigger: "#gallery",
+            start: "top 70%",
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power3.out",
+    });
+
+    // Sections
+    const sections = document.querySelectorAll("#sections > *");
+
+    gsap.from(sections, {
+        scrollTrigger: {
+            trigger: "#sections",
+            start: "top 70%",
+        },
+        opacity: 0,
+        duration: 1,
+        stagger: 0.08,
+        ease: "power3.out",
+    });
+
+    // Animate board pills
+
+    const pills = document.querySelectorAll("#board-grid > *");
+
+    gsap.from(pills, {
+        scrollTrigger: {
+            trigger: ".board-scroll-trigger",
+            start: "top 85%",
+        },
+        opacity: 0,
+        duration: 1,
+        stagger: {
+            each: 0.05,
+            from: "random",
+            ease: "power2.inOut",
+        },
+        ease: "power3.out",
+    });
+
+    // Mobile menu (TODO: Move this to a separate component)
+
+    const menuToggle = document.querySelector<HTMLElement>("#menu-toggle")!;
+    const mobileMenu = document.querySelector<HTMLElement>("#mobile-menu")!;
+    const mobileLinks =
+        document.querySelectorAll<HTMLElement>(".mobile-nav-link")!;
+
+    const menuTl = gsap.timeline({
+        paused: true,
+        defaults: { duration: 0.3, ease: "power2.inOut" },
+    });
+
+    gsap.set(".line-top, .line-mid, .line-bot", {
+        transformOrigin: "center center",
+    });
+
+    menuTl
+        // Fade out middle line
+        .to(".line-mid", { opacity: 0 }, 0)
+        // Move top line to center and rotate
+        .to(".line-top", { y: 6, rotation: 45 }, 0)
+        // Move bottom line to center and rotate
+        .to(".line-bot", { y: -6, rotation: -45 }, 0)
+        // 2. Open the Menu
+        .to(
+            mobileMenu,
+            {
+                opacity: 1,
+                pointerEvents: "all",
+                duration: 0.2,
+            },
+            0,
+        ) // Starts at the same time as the icon animation
+        .from(
+            ".mobile-nav-link",
+            {
+                y: 20,
+                opacity: 0,
+                stagger: 0.05,
+                duration: 0.2,
+                ease: "power3.out",
+            },
+            "-=0.2",
+        );
+
+    let isMenuOpen = false;
+
+    menuToggle.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+
+        if (isMenuOpen) {
+            menuTl.play();
+            document.body.style.overflow = "hidden";
+        } else {
+            menuTl.reverse();
+            document.body.style.overflow = "";
+        }
+    });
+
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            isMenuOpen = false;
+            menuTl.reverse();
+            document.body.style.overflow = "";
+        });
+    });
+</script>
