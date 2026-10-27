@@ -38,6 +38,8 @@ export const ui = {
     "section.algo":
       "Dla pasjonatów algorytmiki. Reprezentujemy nas na AMPPZ i CERC oraz prowadzimy sparingi i zajęcia dla osób ze znajomością podstaw OI/OIJ.",
     "section.ai": "Zgłębiamy AI, Machine Learning i sieci neuronowe.",
+    "section.aiCompetitions":
+      "Wspólnie startujemy w konkursach ML, takich jak Kaggle i PolEval. Zapewniamy zespół, zasoby obliczeniowe i zadania dla początkujących i zaawansowanych.",
     "section.infra":
       "Zajmujemy się infrastrukturą IT, pracą z systemem Linux oraz wdrażaniem aplikacji na serwery.",
     "section.web":
@@ -82,6 +84,8 @@ export const ui = {
     "section.algo":
       "For algorithmics enthusiasts. We compete at AMPPZ and CERC, and we run practice sessions and classes for people with a basic knowledge of OI/OIJ.",
     "section.ai": "We explore AI, machine learning, and neural networks.",
+    "section.aiCompetitions":
+      "We team up for ML competitions such as Kaggle and PolEval. We provide teammates, computing resources, and challenges for beginners and experienced participants.",
     "section.infra":
       "We work with IT infrastructure, Linux systems, and deploying applications to servers.",
     "section.web":
